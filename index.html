@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FC 皇冠大使安麗體驗館導覽</title>
+    <title>你就是未來的FC皇冠大使</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap" rel="stylesheet">
@@ -14,10 +14,9 @@
             -webkit-tap-highlight-color: transparent;
         }
         
-        /* 強化版金屬漸層邊框 */
         .gold-ring {
             background: linear-gradient(145deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            padding: 3px; /* 邊框寬度 */
+            padding: 3px;
             box-shadow: 0 4px 15px rgba(184, 134, 11, 0.2);
         }
 
@@ -25,6 +24,11 @@
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .user-card {
+            background: linear-gradient(to right, #fffdf5, #ffffff);
+            border: 2px solid #fbbf24;
         }
 
         .quote-symbol {
@@ -36,30 +40,36 @@
         }
 
         .card-active:active {
-            transform: scale(0.97);
-            background-color: #fffbeb;
+            transform: scale(0.98);
         }
 
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        /* 輸入框樣式 */
+        .custom-input {
+            width: 100%;
+            padding: 12px 16px;
+            border-radius: 15px;
+            border: 2px solid #e2e8f0;
+            background: white;
+            transition: all 0.3s;
+            outline: none;
+            font-size: 14px;
         }
-        .float-animation {
-            animation: float 4s ease-in-out infinite;
+        .custom-input:focus {
+            border-color: #fbbf24;
+            box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.1);
         }
     </style>
 </head>
 <body class="text-slate-900 pb-8">
 
-    <header class="relative py-10 px-6 text-center overflow-hidden">
-        <div class="relative z-10 animate__animated animate__fadeIn">
-            <div class="inline-flex items-center justify-center w-20 h-20 mb-4 rounded-full bg-white shadow-2xl gold-ring float-animation">
-                <span class="text-3xl">👑</span>
-            </div>
-            <h1 class="text-3xl font-black tracking-tight text-slate-800 mb-2">FC 皇冠大使</h1>
-            <p class="text-amber-700 font-bold tracking-widest text-sm">安麗體驗館導覽說故事</p>
-            <div class="h-1 w-16 bg-gradient-to-r from-transparent via-amber-400 to-transparent mx-auto mt-4"></div>
+    <header class="relative pt-10 pb-6 px-6 text-center">
+        <h1 class="text-2xl font-black tracking-tight text-slate-800 mb-6">FC 皇冠大使<br><span class="text-amber-600 text-lg">安麗體驗館導覽說故事</span></h1>
+        
+        <!-- 使用者輸入區域 -->
+        <div class="max-w-md mx-auto space-y-3 bg-white p-5 rounded-3xl shadow-sm border border-slate-100">
+            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">打造你的傳奇名片</p>
+            <input type="text" id="input-name" placeholder="輸入你的名字" class="custom-input" maxlength="15">
+            <input type="text" id="input-motto" placeholder="輸入你的座右銘" class="custom-input" maxlength="30">
         </div>
     </header>
 
@@ -68,9 +78,9 @@
             <!-- 內容由 JavaScript 動態生成 -->
         </div>
 
-        <footer class="mt-12 mb-8 text-center animate__animated animate__fadeIn">
-            <div class="inline-block px-4 py-1 border-t border-slate-200">
-                <p class="text-xs text-slate-500 font-bold tracking-wider opacity-80">
+        <footer class="mt-8 mb-8 text-center animate__animated animate__fadeIn">
+            <div class="inline-block px-4 py-1 border-t border-slate-300">
+                <p class="text-sm text-slate-600 font-black tracking-wider pt-2">
                     APP設計：杜杜龍 2026/5/12
                 </p>
             </div>
@@ -82,68 +92,85 @@
             { name: "陳婉芬 嵇龍生", quote: "成功不是你贏過多少人，而是你幫助過多少人。", id: "2", url: "https://www.amway.com.tw/wechat/aep/member/member2.html" },
             { name: "傅後堅", quote: "每個人都應該給自己一個機會，一個可以改變一生的機會。", id: "3", url: "https://www.amway.com.tw/wechat/aep/member/member3.html" },
             { name: "王儷凱", quote: "一個人的成就，絕不會超過他的夢想。", id: "9", url: "https://www.amway.com.tw/wechat/aep/member/member9.html" },
-            { name: "許旭昇 謝淑芬", quote: "誠信是我們事業的核心，也是給夥伴最好的承諾。", id: "7", url: "https://www.amway.com.tw/wechat/aep/member/member7.html" },
             { name: "雷宇鳴", quote: "成功不是將來才有的，而是從決定去做的那一刻起，持續累積而成。", id: "1", url: "https://www.amway.com.tw/wechat/aep/member/member1.html" },
-            { name: "鍾易宏", quote: "堅持，是通往成功的唯一捷徑。", id: "5", url: "https://www.amway.com.tw/wechat/aep/member/member5.html" },
             { name: "楊嘉譁 陳仕騏", quote: "追求卓越，成功自然就會跟隨你。", id: "4", url: "https://www.amway.com.tw/wechat/aep/member/member4.html" },
+            { name: "鍾易宏", quote: "堅持，是通往成功的唯一捷徑。", id: "5", url: "https://www.amway.com.tw/wechat/aep/member/member5.html" },
             { name: "曾玉玲 呂森林", quote: "在安麗，我們不只看到事業，更看到生命的無限可能。", id: "6", url: "https://www.amway.com.tw/wechat/aep/member/member6.html" },
+            { name: "許旭昇 謝淑芬", quote: "誠信是我們事業的核心，也是給夥伴最好的承諾。", id: "7", url: "https://www.amway.com.tw/wechat/aep/member/member7.html" },
             { name: "游麗珠 謝建宗", quote: "選擇大於努力，正確的選擇讓努力更有價值。", id: "8", url: "https://www.amway.com.tw/wechat/aep/member/member8.html" },
             { name: "涂永松 黃玉燕", quote: "把簡單的事情重覆做，就是專家；把重覆的事情用心做，就是贏家。", id: "10", url: "https://www.amway.com.tw/wechat/aep/member/member10.html" },
-            { name: "楊貫一 鄭家華", quote: "知識可以改變命運，學習可以創造未來。", id: "12", url: "https://www.amway.com.tw/wechat/aep/member/member12.html" },
             { name: "許明哲 張瓅文", quote: "勇於嘗試，是邁向非凡人生的第一步。", id: "11", url: "https://www.amway.com.tw/wechat/aep/member/member11.html" },
+            { name: "楊貫一 鄭家華", quote: "知識可以改變命運，學習可以創造未來。", id: "12", url: "https://www.amway.com.tw/wechat/aep/member/member12.html" },
             { name: "施素真", quote: "做自己生命中的貴人，活出最亮麗的人生。", id: "13", url: "https://www.amway.com.tw/wechat/aep/member/member13.html" }
         ];
 
-        function initApp() {
+        function renderList() {
             const container = document.getElementById('ambassador-container');
+            const userName = document.getElementById('input-name').value || "未來的皇冠大使";
+            const userMotto = document.getElementById('input-motto').value || "點擊上方輸入你的座右銘";
             
+            container.innerHTML = '';
+
+            // 1. 先渲染使用者自己的卡片
+            const userCard = createCard({
+                name: userName,
+                quote: userMotto,
+                isUser: true
+            });
+            container.appendChild(userCard);
+
+            // 2. 渲染其他大使
             ambassadors.forEach((person, index) => {
-                const card = document.createElement('div');
-                card.className = `animate__animated animate__fadeInUp`;
-                card.style.animationDelay = `${index * 0.08}s`;
-                
-                // 唯一使用本地路徑
-                const imgPath = `img/${person.id}.jpg`;
-
-                card.innerHTML = `
-                    <div onclick="window.open('${person.url}', '_blank')" 
-                         class="glass-card card-active group relative flex items-center p-4 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer overflow-hidden border border-slate-200">
-                        
-                        <!-- 頭像區塊：獨立的金邊容器 -->
-                        <div class="flex-shrink-0">
-                            <div class="w-20 h-20 gold-ring rounded-full overflow-hidden">
-                                <div class="w-full h-full rounded-full overflow-hidden bg-slate-100">
-                                    <img src="${imgPath}" 
-                                         alt="${person.name}"
-                                         class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                         onerror="handleImageError(this)">
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 文字區塊 -->
-                        <div class="ml-4 flex-grow">
-                            <h2 class="text-lg font-black text-slate-800 mb-1 group-hover:text-amber-700 transition-colors">
-                                ${person.name}
-                            </h2>
-                            <div class="flex items-start">
-                                <span class="quote-symbol">“</span>
-                                <p class="text-[13px] leading-relaxed text-slate-600 font-medium italic">
-                                    ${person.quote}
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- 箭頭 -->
-                        <div class="ml-2 text-amber-500 opacity-30 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </div>
-                    </div>
-                `;
+                const card = createCard(person);
                 container.appendChild(card);
             });
+        }
+
+        function createCard(data) {
+            const isUser = data.isUser || false;
+            const cardWrap = document.createElement('div');
+            cardWrap.className = `animate__animated animate__fadeInUp`;
+            
+            const imgHTML = isUser 
+                ? `<div class="w-full h-full rounded-full flex items-center justify-center bg-amber-50 text-3xl">👑</div>`
+                : `<img src="img/${data.id}.jpg" alt="${data.name}" class="w-full h-full object-cover" onerror="handleImageError(this)">`;
+
+            cardWrap.innerHTML = `
+                <div onclick="${isUser ? '' : `window.open('${data.url}', '_blank')`}" 
+                     class="glass-card ${isUser ? 'user-card' : ''} card-active group relative flex items-center p-4 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer overflow-hidden">
+                    
+                    <!-- 頭像區塊 -->
+                    <div class="flex-shrink-0">
+                        <div class="w-20 h-20 gold-ring rounded-full overflow-hidden">
+                            <div class="w-full h-full rounded-full overflow-hidden bg-white">
+                                ${imgHTML}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 文字區塊 -->
+                    <div class="ml-4 flex-grow">
+                        <h2 class="text-lg font-black ${isUser ? 'text-amber-800' : 'text-slate-800'} mb-1 group-hover:text-amber-700 transition-colors">
+                            ${data.name}
+                        </h2>
+                        <div class="flex items-start">
+                            <span class="quote-symbol">“</span>
+                            <p class="text-[13px] leading-relaxed text-slate-600 font-medium italic">
+                                ${data.quote}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 箭頭 (使用者卡片不顯示箭頭) -->
+                    ${isUser ? '' : `
+                    <div class="ml-2 text-amber-500 opacity-30 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </div>`}
+                </div>
+            `;
+            return cardWrap;
         }
 
         function handleImageError(img) {
@@ -153,7 +180,13 @@
             container.innerHTML = `<span class="text-amber-600 font-black text-2xl">${img.alt.charAt(0)}</span>`;
         }
 
-        window.onload = initApp;
+        window.onload = () => {
+            renderList();
+            
+            // 監聽輸入即時更新
+            document.getElementById('input-name').addEventListener('input', renderList);
+            document.getElementById('input-motto').addEventListener('input', renderList);
+        };
     </script>
 </body>
 </html>
