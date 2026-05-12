@@ -14,6 +14,7 @@
             background-image: radial-gradient(circle at 50% 0%, #1e293b 0%, #020617 100%);
             min-height: 100vh;
             color: #f8fafc;
+            overflow-x: hidden;
         }
 
         .premium-gold-text {
@@ -36,23 +37,28 @@
         }
 
         .user-card {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(0,0,0,0) 100%);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(0,0,0,0.05) 100%);
             border: 2px solid #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
         }
 
         .gold-ring {
             background: linear-gradient(145deg, #bf953f, #fcf6ba, #aa771c);
             padding: 3px;
-            box-shadow: 0 0 15px rgba(184, 134, 11, 0.5);
+            box-shadow: 0 0 15px rgba(184, 134, 11, 0.4);
         }
 
         .modal-overlay {
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
         }
 
         /* 隱藏原生 File Input */
         #photo-upload { display: none; }
+
+        input::placeholder, textarea::placeholder {
+            color: rgba(255,255,255,0.3);
+        }
     </style>
 </head>
 <body class="pb-12">
@@ -74,18 +80,19 @@
                     <span class="text-4xl">👑</span>
                 </div>
                 <h3 class="text-2xl font-black premium-gold-text">開啟您的傳奇故事</h3>
+                <p class="text-slate-400 text-xs mt-2">請輸入您的個人資訊以客製化導覽</p>
             </div>
             
             <div class="space-y-6">
                 <div>
                     <label class="text-[11px] font-black text-amber-500 ml-2 mb-2 block uppercase tracking-[0.2em]">您的姓名</label>
-                    <input type="text" id="input-name" placeholder="輸入大名..." class="w-full p-4 rounded-2xl bg-white/5 border border-amber-500/30 focus:border-amber-400 outline-none text-white font-bold">
+                    <input type="text" id="input-name" placeholder="例如：杜杜龍" class="w-full p-4 rounded-2xl bg-white/5 border border-amber-500/30 focus:border-amber-400 outline-none text-white font-bold transition-all">
                 </div>
                 <div>
                     <label class="text-[11px] font-black text-amber-500 ml-2 mb-2 block uppercase tracking-[0.2em]">您的座右銘</label>
-                    <textarea id="input-motto" placeholder="留下一句激勵的話..." class="w-full p-4 rounded-2xl bg-white/5 border border-amber-500/30 focus:border-amber-400 outline-none h-24 resize-none text-white"></textarea>
+                    <textarea id="input-motto" placeholder="留下一句激勵的話..." class="w-full p-4 rounded-2xl bg-white/5 border border-amber-500/30 focus:border-amber-400 outline-none h-24 resize-none text-white transition-all"></textarea>
                 </div>
-                <button onclick="saveProfile()" class="w-full bg-gradient-to-r from-amber-600 to-amber-400 py-5 rounded-2xl text-slate-900 font-black text-lg shadow-lg active:scale-95 transition-transform">
+                <button onclick="saveProfile()" class="w-full bg-gradient-to-r from-amber-600 to-amber-400 py-5 rounded-2xl text-slate-900 font-black text-lg shadow-lg active:scale-95 transition-all">
                     確認進入
                 </button>
             </div>
@@ -94,14 +101,15 @@
 
     <main class="max-w-md mx-auto px-5">
         <div id="ambassador-container" class="space-y-6">
-            <!-- 由 JS 動態生成內容 -->
+            <!-- 內容由 JavaScript 動態生成 -->
         </div>
 
+        <!-- 隱藏的照片上傳按鈕 -->
         <input type="file" id="photo-upload" accept="image/*" onchange="handlePhotoUpload(this)">
 
-        <footer class="mt-16 text-center space-y-8">
+        <footer class="mt-12 text-center space-y-8">
             <div class="pt-8 border-t border-white/10">
-                <p class="text-sm text-slate-600 font-black tracking-[0.3em] uppercase">
+                <p class="text-sm text-slate-500 font-black tracking-[0.3em] uppercase">
                     APP設計：杜杜龍 2026/5/12
                 </p>
                 <div class="flex justify-center gap-3 mt-4 opacity-30">
@@ -111,7 +119,7 @@
                 </div>
             </div>
 
-            <button onclick="resetApp()" class="px-8 py-3 rounded-full border border-white/10 text-slate-500 text-xs font-bold tracking-widest hover:bg-white/5 transition-colors">
+            <button onclick="resetApp()" class="px-8 py-3 rounded-full border border-white/10 text-slate-600 text-xs font-bold tracking-widest hover:bg-white/5 active:scale-95 transition-all">
                 重新設定個人化資料
             </button>
         </footer>
@@ -122,26 +130,22 @@
             { id: "2", name: "陳婉芬 嵇龍生", quote: "成功不是你贏過多少人，而是你幫助過多少人。", url: "https://www.amway.com.tw/wechat/aep/member/member2.html" },
             { id: "3", name: "傅後堅", quote: "每個人都應該給自己一個機會，一個可以改變一生的機會。", url: "https://www.amway.com.tw/wechat/aep/member/member3.html" },
             { id: "9", name: "王儷凱", quote: "一個人的成就，絕不會超過他的夢想。", url: "https://www.amway.com.tw/wechat/aep/member/member9.html" },
-            { id: "1", name: "雷宇鳴", quote: "成功不是將來才有的，而是從決定去做的那一刻起，持續累積而成。", url: "https://www.amway.com.tw/wechat/aep/member/member1.html" },
-            { id: "4", name: "楊嘉譁 陳仕騏", quote: "追求卓越，成功自然就會跟隨你。", url: "https://www.amway.com.tw/wechat/aep/member/member4.html" },
-            { id: "5", name: "鍾易宏", quote: "堅持，是通往成功的唯一捷徑。", url: "https://www.amway.com.tw/wechat/aep/member/member5.html" },
-            { id: "6", name: "曾玉玲 呂森林", quote: "在安麗，我們不只看到事業，更看到生命的無限可能。", url: "https://www.amway.com.tw/wechat/aep/member/member6.html" },
             { id: "7", name: "許旭昇 謝淑芬", quote: "誠信是我們事業的核心，也是給夥伴最好的承諾。", url: "https://www.amway.com.tw/wechat/aep/member/member7.html" },
+            { id: "1", name: "雷宇鳴", quote: "成功不是將來才有的，而是從決定去做的那一刻起，持續累積而成。", url: "https://www.amway.com.tw/wechat/aep/member/member1.html" },
+            { id: "5", name: "鍾易宏", quote: "堅持，是通往成功的唯一捷徑。", url: "https://www.amway.com.tw/wechat/aep/member/member5.html" },
+            { id: "4", name: "楊嘉譁 陳仕騏", quote: "追求卓越，成功自然就會跟隨你。", url: "https://www.amway.com.tw/wechat/aep/member/member4.html" },
+            { id: "6", name: "曾玉玲 呂森林", quote: "在安麗，我們不只看到事業，更看到生命的無限可能。", url: "https://www.amway.com.tw/wechat/aep/member/member6.html" },
             { id: "8", name: "游麗珠 謝建宗", quote: "選擇大於努力，正確的選擇讓努力更有價值。", url: "https://www.amway.com.tw/wechat/aep/member/member8.html" },
             { id: "10", name: "涂永松 黃玉燕", quote: "把簡單的事情重覆做，就是專家；把重覆的事情用心做，就是贏家。", url: "https://www.amway.com.tw/wechat/aep/member/member10.html" },
-            { id: "11", name: "許明哲 張瓅文", quote: "勇於嘗試，是邁向非凡人生的第一步。", url: "https://www.amway.com.tw/wechat/aep/member/member11.html" },
             { id: "12", name: "楊貫一 鄭家華", quote: "知識可以改變命運，學習可以創造未來。", url: "https://www.amway.com.tw/wechat/aep/member/member12.html" },
+            { id: "11", name: "許明哲 張瓅文", quote: "勇於嘗試，是邁向非凡人生的第一步。", url: "https://www.amway.com.tw/wechat/aep/member/member11.html" },
             { id: "13", name: "施素真", quote: "做自己生命中的貴人，活出最亮麗的人生。", url: "https://www.amway.com.tw/wechat/aep/member/member13.html" }
         ];
 
-        let profile = {
-            name: '',
-            motto: '',
-            photo: null
-        };
+        let profile = { name: '', motto: '', photo: null };
 
         function initApp() {
-            const saved = localStorage.getItem('fc_profile');
+            const saved = localStorage.getItem('fc_profile_v2');
             if (saved) {
                 profile = JSON.parse(saved);
                 renderUI();
@@ -167,39 +171,63 @@
             profile.name = name;
             profile.motto = motto;
             
-            localStorage.setItem('fc_profile', JSON.stringify(profile));
-            document.getElementById('input-modal').classList.add('animate__fadeOut');
+            localStorage.setItem('fc_profile_v2', JSON.stringify(profile));
+            const modal = document.getElementById('input-modal');
+            modal.classList.add('animate__fadeOut');
             setTimeout(() => {
-                document.getElementById('input-modal').classList.add('hidden');
+                modal.classList.add('hidden');
+                modal.classList.remove('animate__fadeOut');
                 renderUI();
             }, 500);
         }
 
         function handlePhotoUpload(input) {
             const file = input.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    profile.photo = e.target.result;
-                    localStorage.setItem('fc_profile', JSON.stringify(profile));
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    // 使用 Canvas 進行壓縮優化
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+                    
+                    // 設定最大寬度，減少儲存體積但保留視覺品質
+                    const MAX_WIDTH = 1024;
+                    if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
+                    // 轉為 jpeg 格式並優化品質，這能讓 10MB 檔案變成約 200KB
+                    const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.8);
+                    profile.photo = compressedDataUrl;
+                    localStorage.setItem('fc_profile_v2', JSON.stringify(profile));
                     renderUI();
                 };
-                reader.readAsDataURL(file);
-            }
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
         }
 
         function renderUI() {
-            // 更新標題
-            document.getElementById('display-name').innerText = `${profile.name} GAR.F皇冠大使`;
+            document.getElementById('display-name').innerText = `${profile.name} 皇冠大使`;
             document.getElementById('display-greeting').innerText = getGreeting();
             
             const container = document.getElementById('ambassador-container');
             container.innerHTML = '';
 
-            // 1. 渲染使用者卡片 (置頂)
+            // 1. 渲染使用者專屬卡片
             const userCard = createCard({
                 name: profile.name,
-                quote: profile.motto || "預約下一個傳奇故事...",
+                quote: profile.motto || "點擊左側上傳照片，開啟您的傳奇故事...",
                 isUser: true,
                 photo: profile.photo
             });
@@ -218,22 +246,21 @@
             const cardWrap = document.createElement('div');
             cardWrap.className = `animate__animated animate__fadeInUp`;
             
-            // 頭像內容：使用者若有照片顯示照片，否則顯示皇冠
             const imgContent = isUser 
-                ? (data.photo ? `<img src="${data.photo}" class="w-full h-full object-cover rounded-full">` : `<div class="w-full h-full flex items-center justify-center bg-amber-500/10 text-4xl">👑</div>`)
+                ? (data.photo ? `<img src="${data.photo}" class="w-full h-full object-cover rounded-full">` : `<div class="w-full h-full flex items-center justify-center bg-slate-800 text-3xl">👑</div>`)
                 : `<img src="img/${data.id}.jpg" alt="${data.name}" class="w-full h-full object-cover rounded-full" onerror="handleImageError(this)">`;
 
             cardWrap.innerHTML = `
                 <div onclick="${isUser ? 'document.getElementById(\'photo-upload\').click()' : `window.open('${data.url}', '_blank')`}" 
-                     class="glass-card ${isUser ? 'user-card scale-105 my-6' : ''} active:scale-95 flex items-center p-5 rounded-[2.5rem] transition-all duration-300 cursor-pointer group relative overflow-hidden">
+                     class="glass-card ${isUser ? 'user-card scale-105 my-8' : ''} active:scale-95 flex items-center p-5 rounded-[2.5rem] transition-all duration-300 cursor-pointer group relative overflow-hidden">
                     
                     <div class="flex-shrink-0 relative z-10">
-                        <div class="w-20 h-20 gold-ring rounded-full p-[3px]">
+                        <div class="w-20 h-20 gold-ring rounded-full">
                             <div class="w-full h-full rounded-full overflow-hidden bg-slate-900 flex items-center justify-center">
                                 ${imgContent}
                             </div>
                         </div>
-                        ${isUser ? '<div class="absolute -bottom-1 -right-1 bg-amber-500 text-slate-900 rounded-full p-1 shadow-lg"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path></svg></div>' : ''}
+                        ${isUser ? '<div class="absolute -bottom-1 -right-1 bg-amber-500 text-slate-900 rounded-full p-1 shadow-lg animate-pulse"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path></svg></div>' : ''}
                     </div>
 
                     <div class="ml-5 flex-grow relative z-10">
@@ -259,10 +286,8 @@
         }
 
         function resetApp() {
-            if(confirm("確定要清除個人資料並重新設定嗎？")) {
-                localStorage.removeItem('fc_profile');
-                location.reload();
-            }
+            localStorage.removeItem('fc_profile_v2');
+            location.reload();
         }
 
         window.onload = initApp;
