@@ -3,125 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>你就是未來的FC皇冠大使</title>
+    <title>FC 皇冠大使導覽</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Noto Sans TC', sans-serif;
-            background-color: #f8fafc;
-            -webkit-tap-highlight-color: transparent;
+            background-color: #0f172a; /* 深邃藍底色，襯托金色 */
+            background-image: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%);
+            min-height: 100vh;
         }
         
-        .gold-ring {
-            background: linear-gradient(145deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-            padding: 3px;
-            box-shadow: 0 4px 15px rgba(184, 134, 11, 0.2);
+        /* 華麗流光金屬文字 */
+        .premium-gold-text {
+            background: linear-gradient(to right, #bf953f 20%, #fcf6ba 40%, #b38728 60%, #fbf5b7 80%, #aa771c 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shineText 4s linear infinite;
+            text-shadow: 0px 4px 10px rgba(0,0,0,0.3);
         }
 
+        @keyframes shineText {
+            to { background-position: 200% center; }
+        }
+
+        /* 玻璃擬態卡片 */
         .glass-card {
-            background: rgba(255, 255, 255, 0.98);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(226, 232, 240, 0.8);
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
         }
 
         .user-card {
-            background: linear-gradient(to right, #fffdf5, #ffffff);
-            border: 2px solid #fbbf24;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.1) 0%, rgba(0,0,0,0) 100%);
+            border: 2px solid #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
         }
 
-        .quote-symbol {
-            font-family: serif;
-            font-size: 1.8rem;
-            color: #d4af37;
-            opacity: 0.6;
-            margin-right: 4px;
+        /* 金屬邊框環 */
+        .gold-ring {
+            background: linear-gradient(145deg, #bf953f, #fcf6ba, #aa771c);
+            padding: 3px; /* 增加邊框間距 */
+            box-shadow: 0 0 15px rgba(184, 134, 11, 0.4);
         }
 
-        .card-active:active {
-            transform: scale(0.98);
+        .modal-overlay {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(15px);
         }
 
-        /* 輸入框樣式 */
-        .custom-input {
-            width: 100%;
-            padding: 12px 16px;
-            border-radius: 15px;
-            border: 2px solid #e2e8f0;
-            background: white;
-            transition: all 0.3s;
-            outline: none;
-            font-size: 14px;
-        }
-        .custom-input:focus {
-            border-color: #fbbf24;
-            box-shadow: 0 0 0 4px rgba(251, 191, 36, 0.1);
+        .gold-btn {
+            background: linear-gradient(to right, #bf953f, #d4af37, #b38728);
+            box-shadow: 0 4px 15px rgba(184, 134, 11, 0.4);
         }
     </style>
 </head>
-<body class="text-slate-900 pb-8">
+<body class="text-white pb-10">
 
-    <header class="relative pt-10 pb-6 px-6 text-center">
-        <h1 class="text-2xl font-black tracking-tight text-slate-800 mb-6">FC 皇冠大使<br><span class="text-amber-600 text-lg">安麗體驗館導覽說故事</span></h1>
-        
-        <!-- 使用者輸入區域 -->
-        <div class="max-w-md mx-auto space-y-3 bg-white p-5 rounded-3xl shadow-sm border border-slate-100">
-            <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">打造你的傳奇名片</p>
-            <input type="text" id="input-name" placeholder="輸入你的名字" class="custom-input" maxlength="15">
-            <input type="text" id="input-motto" placeholder="輸入你的座右銘" class="custom-input" maxlength="30">
+    <header class="relative pt-20 pb-12 px-6 text-center overflow-hidden">
+        <div class="animate__animated animate__zoomIn">
+            <h1 id="main-title" class="text-3xl md:text-5xl font-black tracking-widest leading-tight">
+                <span class="premium-gold-text">皇冠大使 <span id="display-name" class="border-b-4 border-amber-500 pb-1">您</span> 您好！</span>
+            </h1>
         </div>
     </header>
 
+    <div id="input-modal" class="fixed inset-0 z-50 flex items-center justify-center px-6">
+        <div class="modal-overlay absolute inset-0"></div>
+        <div class="glass-card w-full max-w-sm rounded-[2.5rem] p-10 shadow-2xl relative animate__animated animate__fadeInUp">
+            <div class="text-center mb-10">
+                <div class="inline-block p-4 bg-amber-500/10 rounded-full mb-4">
+                    <span class="text-4xl">👑</span>
+                </div>
+                <h3 class="text-2xl font-black premium-gold-text">開啟成功扉頁</h3>
+            </div>
+            
+            <div class="space-y-6">
+                <div>
+                    <label class="text-[10px] font-black text-amber-500 ml-2 mb-2 block uppercase tracking-[0.2em]">輸入姓名</label>
+                    <input type="text" id="input-name" placeholder="您的尊姓大名..." class="w-full p-4 rounded-2xl bg-white/10 border border-amber-500/30 focus:border-amber-400 outline-none text-lg font-bold text-white shadow-inner">
+                </div>
+                <div>
+                    <label class="text-[10px] font-black text-amber-500 ml-2 mb-2 block uppercase tracking-[0.2em]">成功座右銘</label>
+                    <textarea id="input-motto" placeholder="留下一句激勵的話..." class="w-full p-4 rounded-2xl bg-white/10 border border-amber-500/30 focus:border-amber-400 outline-none h-28 resize-none font-medium text-white shadow-inner"></textarea>
+                </div>
+                <button onclick="saveAndClose()" class="w-full gold-btn py-5 rounded-2xl text-slate-900 font-black text-lg mt-4 tracking-widest active:scale-95 transition-transform">
+                    確認進入
+                </button>
+            </div>
+        </div>
+    </div>
+
     <main class="max-w-md mx-auto px-5">
-        <div id="ambassador-container" class="space-y-4">
+        <div id="ambassador-container" class="space-y-6">
             <!-- 內容由 JavaScript 動態生成 -->
         </div>
 
-        <footer class="mt-8 mb-8 text-center animate__animated animate__fadeIn">
-            <div class="inline-block px-4 py-1 border-t border-slate-300">
-                <p class="text-sm text-slate-600 font-black tracking-wider pt-2">
+        <footer class="mt-16 text-center">
+            <div class="inline-block px-8 py-6 border-t border-white/10">
+                <p class="text-sm text-slate-400 font-black tracking-widest uppercase">
                     APP設計：杜杜龍 2026/5/12
                 </p>
+                <div class="flex justify-center gap-2 mt-4">
+                    <div class="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
+                    <div class="w-2 h-2 bg-amber-500 rounded-full animate-pulse" style="animation-delay: 0.3s"></div>
+                    <div class="w-2 h-2 bg-amber-500 rounded-full animate-pulse" style="animation-delay: 0.6s"></div>
+                </div>
             </div>
         </footer>
     </main>
 
     <script>
         const ambassadors = [
-            { name: "陳婉芬 嵇龍生", quote: "成功不是你贏過多少人，而是你幫助過多少人。", id: "2", url: "https://www.amway.com.tw/wechat/aep/member/member2.html" },
-            { name: "傅後堅", quote: "每個人都應該給自己一個機會，一個可以改變一生的機會。", id: "3", url: "https://www.amway.com.tw/wechat/aep/member/member3.html" },
-            { name: "王儷凱", quote: "一個人的成就，絕不會超過他的夢想。", id: "9", url: "https://www.amway.com.tw/wechat/aep/member/member9.html" },
-            { name: "雷宇鳴", quote: "成功不是將來才有的，而是從決定去做的那一刻起，持續累積而成。", id: "1", url: "https://www.amway.com.tw/wechat/aep/member/member1.html" },
-            { name: "楊嘉譁 陳仕騏", quote: "追求卓越，成功自然就會跟隨你。", id: "4", url: "https://www.amway.com.tw/wechat/aep/member/member4.html" },
-            { name: "鍾易宏", quote: "堅持，是通往成功的唯一捷徑。", id: "5", url: "https://www.amway.com.tw/wechat/aep/member/member5.html" },
-            { name: "曾玉玲 呂森林", quote: "在安麗，我們不只看到事業，更看到生命的無限可能。", id: "6", url: "https://www.amway.com.tw/wechat/aep/member/member6.html" },
-            { name: "許旭昇 謝淑芬", quote: "誠信是我們事業的核心，也是給夥伴最好的承諾。", id: "7", url: "https://www.amway.com.tw/wechat/aep/member/member7.html" },
-            { name: "游麗珠 謝建宗", quote: "選擇大於努力，正確的選擇讓努力更有價值。", id: "8", url: "https://www.amway.com.tw/wechat/aep/member/member8.html" },
-            { name: "涂永松 黃玉燕", quote: "把簡單的事情重覆做，就是專家；把重覆的事情用心做，就是贏家。", id: "10", url: "https://www.amway.com.tw/wechat/aep/member/member10.html" },
-            { name: "許明哲 張瓅文", quote: "勇於嘗試，是邁向非凡人生的第一步。", id: "11", url: "https://www.amway.com.tw/wechat/aep/member/member11.html" },
-            { name: "楊貫一 鄭家華", quote: "知識可以改變命運，學習可以創造未來。", id: "12", url: "https://www.amway.com.tw/wechat/aep/member/member12.html" },
-            { name: "施素真", quote: "做自己生命中的貴人，活出最亮麗的人生。", id: "13", url: "https://www.amway.com.tw/wechat/aep/member/member13.html" }
+            { id: "2", name: "陳婉芬 嵇龍生", quote: "成功不是你贏過多少人，而是你幫助過多少人。", url: "https://www.amway.com.tw/wechat/aep/member/member2.html" },
+            { id: "3", name: "傅後堅", quote: "每個人都應該給自己一個機會，一個可以改變一生的機會。", url: "https://www.amway.com.tw/wechat/aep/member/member3.html" },
+            { id: "9", name: "王儷凱", quote: "一個人的成就，絕不會超過他的夢夢想。", url: "https://www.amway.com.tw/wechat/aep/member/member9.html" },
+            { id: "7", name: "許旭昇 謝淑芬", quote: "誠信是我們事業的核心，也是給夥伴最好的承諾。", url: "https://www.amway.com.tw/wechat/aep/member/member7.html" },
+            { id: "1", name: "雷宇鳴", quote: "成功不是將來才有的，而是從決定去做的那一刻起，持續累積而成。", url: "https://www.amway.com.tw/wechat/aep/member/member1.html" },
+            { id: "4", name: "楊嘉譁 陳仕騏", quote: "追求卓越，成功自然就會跟隨你。", url: "https://www.amway.com.tw/wechat/aep/member/member4.html" },
+            { id: "5", name: "鍾易宏", quote: "堅持，是通往成功的唯一捷徑。", url: "https://www.amway.com.tw/wechat/aep/member/member5.html" },
+            { id: "6", name: "曾玉玲 呂森林", quote: "在安麗，我們不只看到事業，更看到生命的無限可能。", url: "https://www.amway.com.tw/wechat/aep/member/member6.html" },
+            { id: "8", name: "游麗珠 謝建宗", quote: "選擇大於努力，正確的選擇讓努力更有價值。", url: "https://www.amway.com.tw/wechat/aep/member/member8.html" },
+            { id: "10", name: "涂永松 黃玉燕", quote: "把簡單的事情重覆做，就是專家；把重覆的事情用心做，就是贏家。", url: "https://www.amway.com.tw/wechat/aep/member/member10.html" },
+            { id: "12", name: "楊貫一 鄭家華", quote: "知識可以改變命運，學習可以創造未來。", url: "https://www.amway.com.tw/wechat/aep/member/member12.html" },
+            { id: "11", name: "許明哲 張瓅文", quote: "勇於嘗試，是邁向非凡人生的第一步。", url: "https://www.amway.com.tw/wechat/aep/member/member11.html" },
+            { id: "13", name: "施素真", quote: "做自己生命中的貴人，活出最亮麗的人生。", url: "https://www.amway.com.tw/wechat/aep/member/member13.html" }
         ];
+
+        let userProfile = {
+            name: "您",
+            quote: ""
+        };
+
+        function toggleModal(show) {
+            const modal = document.getElementById('input-modal');
+            if (!show) {
+                modal.classList.add('animate__fadeOutDown');
+                setTimeout(() => modal.style.display = 'none', 500);
+            }
+        }
+
+        function saveAndClose() {
+            const name = document.getElementById('input-name').value.trim();
+            const motto = document.getElementById('input-motto').value.trim();
+            
+            if (name) userProfile.name = name;
+            userProfile.quote = motto || "預約下一個傳奇...";
+            
+            updateUI();
+            toggleModal(false);
+        }
+
+        function updateUI() {
+            document.getElementById('display-name').innerText = userProfile.name;
+            renderList();
+        }
 
         function renderList() {
             const container = document.getElementById('ambassador-container');
-            const userName = document.getElementById('input-name').value || "未來的皇冠大使";
-            const userMotto = document.getElementById('input-motto').value || "點擊上方輸入你的座右銘";
-            
             container.innerHTML = '';
 
-            // 1. 先渲染使用者自己的卡片
+            // 渲染使用者名片 (置頂)
             const userCard = createCard({
-                name: userName,
-                quote: userMotto,
+                name: userProfile.name,
+                quote: userProfile.quote,
                 isUser: true
             });
             container.appendChild(userCard);
 
-            // 2. 渲染其他大使
+            // 渲染大使名單
             ambassadors.forEach((person, index) => {
                 const card = createCard(person);
+                card.style.animationDelay = `${(index + 1) * 0.1}s`;
                 container.appendChild(card);
             });
         }
@@ -131,41 +186,38 @@
             const cardWrap = document.createElement('div');
             cardWrap.className = `animate__animated animate__fadeInUp`;
             
-            const imgHTML = isUser 
-                ? `<div class="w-full h-full rounded-full flex items-center justify-center bg-amber-50 text-3xl">👑</div>`
-                : `<img src="img/${data.id}.jpg" alt="${data.name}" class="w-full h-full object-cover" onerror="handleImageError(this)">`;
+            const imgContent = isUser 
+                ? `<div class="w-full h-full rounded-full flex items-center justify-center bg-amber-500/10 text-4xl">👑</div>`
+                : `<img src="img/${data.id}.jpg" alt="${data.name}" class="w-full h-full object-cover rounded-full" onerror="handleImageError(this)">`;
 
             cardWrap.innerHTML = `
                 <div onclick="${isUser ? '' : `window.open('${data.url}', '_blank')`}" 
-                     class="glass-card ${isUser ? 'user-card' : ''} card-active group relative flex items-center p-4 rounded-3xl shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer overflow-hidden">
+                     class="glass-card ${isUser ? 'user-card scale-105 my-6' : ''} active:scale-95 flex items-center p-6 rounded-[2.5rem] transition-all duration-300 cursor-pointer group">
                     
-                    <!-- 頭像區塊 -->
                     <div class="flex-shrink-0">
-                        <div class="w-20 h-20 gold-ring rounded-full overflow-hidden">
-                            <div class="w-full h-full rounded-full overflow-hidden bg-white">
-                                ${imgHTML}
+                        <div class="w-20 h-20 gold-ring rounded-full p-[2px]">
+                            <div class="w-full h-full rounded-full overflow-hidden bg-slate-800">
+                                ${imgContent}
                             </div>
                         </div>
                     </div>
 
-                    <!-- 文字區塊 -->
-                    <div class="ml-4 flex-grow">
-                        <h2 class="text-lg font-black ${isUser ? 'text-amber-800' : 'text-slate-800'} mb-1 group-hover:text-amber-700 transition-colors">
+                    <div class="ml-5 flex-grow">
+                        <h2 class="text-xl font-black ${isUser ? 'premium-gold-text' : 'text-white'} mb-2">
                             ${data.name}
                         </h2>
-                        <div class="flex items-start">
-                            <span class="quote-symbol">“</span>
-                            <p class="text-[13px] leading-relaxed text-slate-600 font-medium italic">
+                        <div class="flex">
+                            <span class="text-amber-500 font-serif text-3xl leading-none mr-1 opacity-50">“</span>
+                            <p class="text-[13px] leading-relaxed text-slate-300 italic font-medium">
                                 ${data.quote}
                             </p>
                         </div>
                     </div>
-
-                    <!-- 箭頭 (使用者卡片不顯示箭頭) -->
+                    
                     ${isUser ? '' : `
-                    <div class="ml-2 text-amber-500 opacity-30 group-hover:opacity-100 group-hover:translate-x-1 transition-all">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
+                    <div class="text-amber-500 opacity-20 group-hover:opacity-100 transition-opacity">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M9 5l7 7-7 7"></path>
                         </svg>
                     </div>`}
                 </div>
@@ -174,18 +226,14 @@
         }
 
         function handleImageError(img) {
-            const container = img.parentElement;
+            const parent = img.parentElement;
             img.style.display = 'none';
-            container.classList.add('flex', 'items-center', 'justify-center', 'bg-amber-50');
-            container.innerHTML = `<span class="text-amber-600 font-black text-2xl">${img.alt.charAt(0)}</span>`;
+            parent.classList.add('flex', 'items-center', 'justify-center', 'bg-slate-700');
+            parent.innerHTML = `<span class="text-amber-500 font-black text-2xl">${img.alt.charAt(0)}</span>`;
         }
 
         window.onload = () => {
             renderList();
-            
-            // 監聽輸入即時更新
-            document.getElementById('input-name').addEventListener('input', renderList);
-            document.getElementById('input-motto').addEventListener('input', renderList);
         };
     </script>
 </body>
