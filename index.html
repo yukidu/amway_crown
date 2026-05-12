@@ -67,7 +67,10 @@
         <div class="animate__animated animate__fadeInDown">
             <h1 class="text-3xl md:text-4xl font-black tracking-wider leading-tight">
                 <span id="display-name" class="premium-gold-text block mb-2">皇冠大使 您好！</span>
-                <span id="display-greeting" class="text-white opacity-90 text-2xl">午安</span>
+                <!-- 強制不換行與適應手機寬度的問候語 -->
+                <span id="display-greeting" class="text-white opacity-90 text-[14px] xs:text-base sm:text-2xl whitespace-nowrap overflow-hidden block">
+                    午安
+                </span>
             </h1>
         </div>
     </header>
@@ -130,15 +133,15 @@
             { id: "2", name: "陳婉芬 嵇龍生", quote: "成功不是你贏過多少人，而是你幫助過多少人。", url: "https://www.amway.com.tw/wechat/aep/member/member2.html" },
             { id: "3", name: "傅後堅", quote: "每個人都應該給自己一個機會，一個可以改變一生的機會。", url: "https://www.amway.com.tw/wechat/aep/member/member3.html" },
             { id: "9", name: "王儷凱", quote: "一個人的成就，絕不會超過他的夢想。", url: "https://www.amway.com.tw/wechat/aep/member/member9.html" },
-            { id: "7", name: "許旭昇 謝淑芬", quote: "誠信是我們事業的核心，也是給夥伴最好的承諾。", url: "https://www.amway.com.tw/wechat/aep/member/member7.html" },
             { id: "1", name: "雷宇鳴", quote: "成功不是將來才有的，而是從決定去做的那一刻起，持續累積而成。", url: "https://www.amway.com.tw/wechat/aep/member/member1.html" },
-            { id: "5", name: "鍾易宏", quote: "堅持，是通往成功的唯一捷徑。", url: "https://www.amway.com.tw/wechat/aep/member/member5.html" },
             { id: "4", name: "楊嘉譁 陳仕騏", quote: "追求卓越，成功自然就會跟隨你。", url: "https://www.amway.com.tw/wechat/aep/member/member4.html" },
+            { id: "5", name: "鍾易宏", quote: "堅持，是通往成功的唯一捷徑。", url: "https://www.amway.com.tw/wechat/aep/member/member5.html" },
             { id: "6", name: "曾玉玲 呂森林", quote: "在安麗，我們不只看到事業，更看到生命的無限可能。", url: "https://www.amway.com.tw/wechat/aep/member/member6.html" },
+            { id: "7", name: "許旭昇 謝淑芬", quote: "誠信是我們事業的核心，也是給夥伴最好的承諾。", url: "https://www.amway.com.tw/wechat/aep/member/member7.html" },
             { id: "8", name: "游麗珠 謝建宗", quote: "選擇大於努力，正確的選擇讓努力更有價值。", url: "https://www.amway.com.tw/wechat/aep/member/member8.html" },
             { id: "10", name: "涂永松 黃玉燕", quote: "把簡單的事情重覆做，就是專家；把重覆的事情用心做，就是贏家。", url: "https://www.amway.com.tw/wechat/aep/member/member10.html" },
-            { id: "12", name: "楊貫一 鄭家華", quote: "知識可以改變命運，學習可以創造未來。", url: "https://www.amway.com.tw/wechat/aep/member/member12.html" },
             { id: "11", name: "許明哲 張瓅文", quote: "勇於嘗試，是邁向非凡人生的第一步。", url: "https://www.amway.com.tw/wechat/aep/member/member11.html" },
+            { id: "12", name: "楊貫一 鄭家華", quote: "知識可以改變命運，學習可以創造未來。", url: "https://www.amway.com.tw/wechat/aep/member/member12.html" },
             { id: "13", name: "施素真", quote: "做自己生命中的貴人，活出最亮麗的人生。", url: "https://www.amway.com.tw/wechat/aep/member/member13.html" }
         ];
 
@@ -189,12 +192,10 @@
             reader.onload = function(e) {
                 const img = new Image();
                 img.onload = function() {
-                    // 使用 Canvas 進行壓縮優化
                     const canvas = document.createElement('canvas');
                     let width = img.width;
                     let height = img.height;
                     
-                    // 設定最大寬度，減少儲存體積但保留視覺品質
                     const MAX_WIDTH = 1024;
                     if (width > MAX_WIDTH) {
                         height *= MAX_WIDTH / width;
@@ -206,7 +207,6 @@
                     const ctx = canvas.getContext('2d');
                     ctx.drawImage(img, 0, 0, width, height);
                     
-                    // 轉為 jpeg 格式並優化品質，這能讓 10MB 檔案變成約 200KB
                     const compressedDataUrl = canvas.toDataURL('image/jpeg', 0.8);
                     profile.photo = compressedDataUrl;
                     localStorage.setItem('fc_profile_v2', JSON.stringify(profile));
@@ -250,6 +250,8 @@
                 ? (data.photo ? `<img src="${data.photo}" class="w-full h-full object-cover rounded-full">` : `<div class="w-full h-full flex items-center justify-center bg-slate-800 text-3xl">👑</div>`)
                 : `<img src="img/${data.id}.jpg" alt="${data.name}" class="w-full h-full object-cover rounded-full" onerror="handleImageError(this)">`;
 
+            const showPenIcon = isUser && !data.photo;
+
             cardWrap.innerHTML = `
                 <div onclick="${isUser ? 'document.getElementById(\'photo-upload\').click()' : `window.open('${data.url}', '_blank')`}" 
                      class="glass-card ${isUser ? 'user-card scale-105 my-8' : ''} active:scale-95 flex items-center p-5 rounded-[2.5rem] transition-all duration-300 cursor-pointer group relative overflow-hidden">
@@ -260,7 +262,7 @@
                                 ${imgContent}
                             </div>
                         </div>
-                        ${isUser ? '<div class="absolute -bottom-1 -right-1 bg-amber-500 text-slate-900 rounded-full p-1 shadow-lg animate-pulse"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path></svg></div>' : ''}
+                        ${showPenIcon ? '<div class="absolute -bottom-1 -right-1 bg-amber-500 text-slate-900 rounded-full p-1 shadow-lg animate-pulse"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"></path></svg></div>' : ''}
                     </div>
 
                     <div class="ml-5 flex-grow relative z-10">
