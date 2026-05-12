@@ -152,11 +152,11 @@
 
         function getGreeting() {
             const hour = new Date().getHours();
-            if (hour < 5) return "深夜好";
-            if (hour < 11) return "早安";
-            if (hour < 14) return "午安";
-            if (hour < 18) return "下午好";
-            return "晚安";
+            if (hour < 5) return "深夜好 拼博的路上就快達標！";
+            if (hour < 11) return "早安 你今天營養早餐吃什麼？";
+            if (hour < 14) return "午安 準備和哪位夥伴談OPP呢？";
+            if (hour < 18) return "下午好 要來杯R＆J嗎？";
+            return "晚安 正在前往教室或聚會的路上嗎？";
         }
 
         function saveProfile() {
@@ -190,7 +190,7 @@
 
         function renderUI() {
             // 更新標題
-            document.getElementById('display-name').innerText = `${profile.name} 皇冠大使`;
+            document.getElementById('display-name').innerText = `${profile.name} GAR.F皇冠大使`;
             document.getElementById('display-greeting').innerText = getGreeting();
             
             const container = document.getElementById('ambassador-container');
