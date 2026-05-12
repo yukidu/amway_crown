@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FC 皇冠大使安麗體驗館導覽</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background-color: #fafafa;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .gold-border {
+            background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+            padding: 2px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(220, 220, 220, 0.5);
+        }
+        .quote-symbol {
+            font-family: serif;
+            font-size: 2rem;
+            line-height: 0;
+            vertical-align: -0.4em;
+            color: #d4af37;
+            opacity: 0.5;
+        }
+        .person-img {
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .card-active:active {
+            transform: scale(0.96);
+            background-color: #fefce8;
+        }
+        @keyframes subtle-shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .shimmer-effect {
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            background-size: 200% 100%;
+            animation: subtle-shimmer 4s infinite linear;
+        }
+    </style>
+</head>
+<body class="text-slate-900 pb-12">
+
+    <header class="relative py-12 px-6 overflow-hidden text-center">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-5 pointer-events-none">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#D4AF37" d="M44.7,-76.4C58.1,-69.2,69.2,-57.4,77.3,-43.8C85.4,-30.2,90.4,-15.1,88.7,-0.9C87.1,13.2,78.8,26.4,69.5,38.2C60.2,50,50,60.4,37.8,68.4C25.6,76.4,12.8,82,0.4,81.4C-12.1,80.7,-24.1,73.8,-35.8,65.5C-47.5,57.1,-58.8,47.4,-67.2,35.5C-75.5,23.5,-80.9,9.4,-80.1,-4.7C-79.3,-18.8,-72.4,-32.8,-62.7,-44.4C-53,-55.9,-40.5,-65.1,-27.4,-72.6C-14.3,-80.1,-0.6,-85.9,13.1,-84.9C26.8,-83.8,40.1,-75.9,44.7,-76.4Z" transform="translate(100 100)" />
+            </svg>
+        </div>
+        
+        <div class="relative z-10 animate__animated animate__fadeInDown">
+            <div class="inline-flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-white shadow-xl gold-border">
+                <span class="text-2xl">👑</span>
+            </div>
+            <h1 class="text-3xl font-black tracking-tighter text-slate-900 mb-2">FC 皇冠大使</h1>
+            <p class="text-amber-700 font-bold tracking-widest text-sm uppercase">安麗體驗館導覽說故事</p>
+            <div class="h-1 w-12 bg-amber-400 mx-auto mt-4 rounded-full"></div>
+        </div>
+    </header>
+
+    <main class="max-w-md mx-auto px-5 space-y-6">
+        <div id="ambassador-container" class="space-y-4">
+            <!-- 內容由 JavaScript 動態生成 -->
+        </div>
+
+        <footer class="pt-16 pb-8 text-center">
+            <p class="text-[10px] text-slate-300 tracking-[0.2em] font-light">
+                APP設計：杜杜龍 2026/5/12
+            </p>
+        </footer>
+    </main>
+
+    <script>
+        const ambassadors = [
+            { 
+                name: "陳婉芬 嵇龍生", 
+                quote: "成功不是你贏過多少人，而是你幫助過多少人。", 
+                memberId: "2",
+                url: "https://www.amway.com.tw/wechat/aep/member/member2.html"
+            },
+            { 
+                name: "傅後堅", 
+                quote: "每個人都應該給自己一個機會，一個可以改變一生的機會。", 
+                memberId: "3",
+                url: "https://www.amway.com.tw/wechat/aep/member/member3.html"
+            },
+            { 
+                name: "王儷凱", 
+                quote: "一個人的成就，絕不會超過他的夢想。", 
+                memberId: "9",
+                url: "https://www.amway.com.tw/wechat/aep/member/member9.html"
+            },
+            { 
+                name: "雷宇鳴", 
+                quote: "成功不是將來才有的，而是從決定去做的那一刻起，持續累積而成。", 
+                memberId: "1",
+                url: "https://www.amway.com.tw/wechat/aep/member/member1.html"
+            },
+            { 
+                name: "楊嘉譁 陳仕騏", 
+                quote: "追求卓越，成功自然就會跟隨你。", 
+                memberId: "4",
+                url: "https://www.amway.com.tw/wechat/aep/member/member4.html"
+            },
+            { 
+                name: "鍾易宏", 
+                quote: "堅持，是通往成功的唯一捷徑。", 
+                memberId: "5",
+                url: "https://www.amway.com.tw/wechat/aep/member/member5.html"
+            },
+            { 
+                name: "曾玉玲 呂森林", 
+                quote: "在安麗，我們不只看到事業，更看到生命的無限可能。", 
+                memberId: "6",
+                url: "https://www.amway.com.tw/wechat/aep/member/member6.html"
+            },
+            { 
+                name: "許旭昇 謝淑芬", 
+                quote: "誠信是我們事業的核心，也是給夥伴最好的承諾。", 
+                memberId: "7",
+                url: "https://www.amway.com.tw/wechat/aep/member/member7.html"
+            },
+            { 
+                name: "游麗珠 謝建宗", 
+                quote: "選擇大於努力，正確的選擇讓努力更有價值。", 
+                memberId: "8",
+                url: "https://www.amway.com.tw/wechat/aep/member/member8.html"
+            },
+            { 
+                name: "涂永松 黃玉燕", 
+                quote: "把簡單的事情重覆做，就是專家；把重覆的事情用心做，就是贏家。", 
+                memberId: "10",
+                url: "https://www.amway.com.tw/wechat/aep/member/member10.html"
+            },
+            { 
+                name: "許明哲 張瓅文", 
+                quote: "勇於嘗試，是邁向非凡人生的第一步。", 
+                memberId: "11",
+                url: "https://www.amway.com.tw/wechat/aep/member/member11.html"
+            },
+            { 
+                name: "楊貫一 鄭家華", 
+                quote: "知識可以改變命運，學習可以創造未來。", 
+                memberId: "12",
+                url: "https://www.amway.com.tw/wechat/aep/member/member12.html"
+            },
+            { 
+                name: "施素真", 
+                quote: "做自己生命中的貴人，活出最亮麗的人生。", 
+                memberId: "13",
+                url: "https://www.amway.com.tw/wechat/aep/member/member13.html"
+            }
+        ];
+
+        function initApp() {
+            const container = document.getElementById('ambassador-container');
+            
+            ambassadors.forEach((person, index) => {
+                const card = document.createElement('div');
+                card.className = `animate__animated animate__fadeInUp`;
+                card.style.animationDelay = `${index * 0.1}s`;
+                
+                // 修正後的圖片連結格式：
+                const imgUrl = `https://www.amway.com.tw/wechat/aep/member/img/member${person.memberId}_1.png`;
+
+                card.innerHTML = `
+                    <div onclick="window.open('${person.url}', '_blank')" 
+                         class="glass-card card-active group relative flex items-center p-4 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer overflow-hidden">
+                        
+                        <div class="absolute inset-0 shimmer-effect opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+
+                        <!-- 大頭照 -->
+                        <div class="relative flex-shrink-0">
+                            <div class="w-20 h-20 gold-border rounded-full shadow-inner overflow-hidden">
+                                <img src="${imgUrl}" 
+                                     alt="${person.name}"
+                                     class="person-img w-full h-full object-cover bg-slate-100 group-hover:scale-110"
+                                     onerror="handleImageError(this)">
+                            </div>
+                        </div>
+
+                        <!-- 資訊 -->
+                        <div class="ml-5 flex-grow pr-2">
+                            <h2 class="text-lg font-black text-slate-800 group-hover:text-amber-700 transition-colors">${person.name}</h2>
+                            <div class="mt-1 flex items-start">
+                                <span class="quote-symbol">“</span>
+                                <p class="text-sm text-slate-500 font-medium leading-relaxed italic">
+                                    ${person.quote}
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- 進入標誌 -->
+                        <div class="flex-shrink-0 opacity-20 group-hover:opacity-100 transition-all group-hover:translate-x-1">
+                            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // 圖片錯誤處理：若官網禁連，改用文字頭像
+        function handleImageError(img) {
+            const parent = img.parentElement;
+            const name = img.alt;
+            img.style.display = 'none';
+            parent.classList.add('flex', 'items-center', 'justify-center', 'bg-amber-50');
+            parent.innerHTML = `<span class="text-amber-600 font-bold text-xl">${name.charAt(0)}</span>`;
+        }
+
+        window.onload = initApp;
+    </script>
+</body>
+</html>
